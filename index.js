@@ -17,8 +17,8 @@ app.use(limiter)
 
 app.get('/randquote', async function (req, res) {
 
-    const { quote, source } = await dbGet('SELECT quote, source FROM Quotes WHERE id IN (SELECT id FROM Quotes ORDER BY RANDOM() LIMIT 1);')
-    res.json({ quote, source })
+    const { quote, source: author } = await dbGet('SELECT quote, source FROM Quotes WHERE id IN (SELECT id FROM Quotes ORDER BY RANDOM() LIMIT 1);')
+    res.json({ quote, author })
 })
 app.get('/', function (req, res) {
     res.send(`
