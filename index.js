@@ -32,3 +32,5 @@ app.get('/', function (req, res) {
 
 const port = 3000
 app.listen(port, "", () => { console.log('App listening at http://localhost:' + port) })
+
+export default app
