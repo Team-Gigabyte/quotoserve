@@ -2,8 +2,12 @@ import express from 'express'
 import sqlite3 from 'sqlite3'
 import { promisify } from 'util'
 import { rateLimit } from 'express-rate-limit'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url';
 
-const db = sqlite3.cached.Database('./node_modules/quotobot/db/quotes.db', sqlite3.OPEN_READONLY)
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const dbPath = resolve(__dirname, '../node_modules/quotobot/db/quotes.db');
+const db = sqlite3.cached.Database(dbPath, sqlite3.OPEN_READONLY)
 const dbGet = promisify(db.get).bind(db)
 
 const app = express()
@@ -15,11 +19,11 @@ const limiter = rateLimit({
 })
 app.use(limiter)
 
-app.get('/randquote', async function (req, res) {
+app.get('/randquote', async function (_req, res) {
     const { quote, source: author } = await dbGet('SELECT quote, source FROM Quotes WHERE id IN (SELECT id FROM Quotes ORDER BY RANDOM() LIMIT 1);')
     res.json({ quote, author })
 })
-app.get('/', function (req, res) {
+app.get('/', function (_req, res) {
     res.send(`
     <h1>Quotoserve</h1>
     <p>Available routes:
