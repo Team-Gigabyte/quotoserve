@@ -1,0 +1,26 @@
+{
+  "name": "quotoserve",
+  "version": "1.0.0",
+  "description": " An API for serving quotes from the same large database that powers Quotobot ",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Team-Gigabyte/quotoserve.git"
+  },
+  "author": "Team-Gigabyte",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Team-Gigabyte/quotoserve/issues"
+  },
+  "homepage": "https://github.com/Team-Gigabyte/quotoserve#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "quotobot": "github:Team-Gigabyte/quotobot",
+    "sqlite3": "^5.1.7"
+  }
+}
