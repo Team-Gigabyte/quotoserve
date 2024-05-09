@@ -16,7 +16,6 @@ const limiter = rateLimit({
 app.use(limiter)
 
 app.get('/randquote', async function (req, res) {
-
     const { quote, source: author } = await dbGet('SELECT quote, source FROM Quotes WHERE id IN (SELECT id FROM Quotes ORDER BY RANDOM() LIMIT 1);')
     res.json({ quote, author })
 })
