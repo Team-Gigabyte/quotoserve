@@ -3,10 +3,10 @@ import sqlite3 from 'sqlite3'
 import { promisify } from 'util'
 import { rateLimit } from 'express-rate-limit'
 import { resolve, dirname } from 'path'
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const dbPath = resolve(__dirname, '../node_modules/quotobot/db/quotes.db');
+const dbPath = resolve(__dirname, '../node_modules/quotobot/db/quotes.db')
 const db = sqlite3.cached.Database(dbPath, sqlite3.OPEN_READONLY)
 const dbGet = promisify(db.get).bind(db)
 
