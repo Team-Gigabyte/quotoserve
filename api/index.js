@@ -18,7 +18,11 @@ const rateLimitConfig = {
     legacyHeaders: false,
 }
 app.use(rateLimit(rateLimitConfig))
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next()
+})
 app.get('/randquote', async function (_req, res) {
     const { quote, source: author } = await dbGet('SELECT quote, source FROM Quotes WHERE id IN (SELECT id FROM Quotes ORDER BY RANDOM() LIMIT 1);')
     res.json({ quote, author })
